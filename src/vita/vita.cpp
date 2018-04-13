@@ -15,19 +15,19 @@ void ana(std::string text, CRFSuite::Tagger &vn_segment,
         std::vector<std::string> &w_chunk_list,
         std::vector<std::string> &tone_list, std::vector<std::string> &phone_list, bool out_tone=false){
     std::string sent = segment(&vn_segment, text);
-    std::string pos = pos_tag(&vn_pos, sent);
-    std::string chunk = chunk_tag(&vn_chunk, sent, pos);
-    const char* delim = " ";
-
-    SplitStringToVector(sent, delim, true, &wlist);
-    SplitStringToVector(pos, delim, true, &w_tag_list);
-    SplitStringToVector(chunk, delim, true, &w_chunk_list);
-
-    for (std::size_t wid = 0; wid != wlist.size(); ++wid){
-        tone_list.push_back("");
-        phone_list.push_back("");
-        dict.GetPhoneme(wlist[wid], &tone_list[wid], &phone_list[wid], out_tone);
-    }
+//    std::string pos = pos_tag(&vn_pos, sent);
+//    std::string chunk = chunk_tag(&vn_chunk, sent, pos);
+//    const char* delim = " ";
+//
+//    SplitStringToVector(sent, delim, true, &wlist);
+//    SplitStringToVector(pos, delim, true, &w_tag_list);
+//    SplitStringToVector(chunk, delim, true, &w_chunk_list);
+//
+//    for (std::size_t wid = 0; wid != wlist.size(); ++wid){
+//        tone_list.push_back("");
+//        phone_list.push_back("");
+//        dict.GetPhoneme(wlist[wid], &tone_list[wid], &phone_list[wid], out_tone);
+//    }
 }
 
 int main(int argc, char *argv[]){
@@ -45,9 +45,9 @@ int main(int argc, char *argv[]){
 
     // Load segment model
     vn_segment.open(options["model_dir"] + "/word_segment.model");
-    vn_pos.open(options["model_dir"]+"/word_pos.model");
-    vn_chunk.open(options["model_dir"]+"/word_chunk.model");
-    dict.LoadDict(options["model_dir"]+"/vn.dict");
+//    vn_pos.open(options["model_dir"]+"/word_pos.model");
+//    vn_chunk.open(options["model_dir"]+"/word_chunk.model");
+//    dict.LoadDict(options["model_dir"]+"/vn.dict");
     std::istream *in;
     std::ifstream ifn;
 
@@ -67,10 +67,10 @@ int main(int argc, char *argv[]){
         }
         std::vector<std::string> wlist, w_tag, w_chunk, tone_list, p_list;
         ana(line, vn_segment, vn_pos, vn_chunk, dict, wlist, w_tag, w_chunk, tone_list, p_list, options.get("out_tone"));
-        for (std::size_t wid = 0; wid != wlist.size(); ++wid){
-            std::cout << wlist[wid] << "\t" << w_tag[wid] << "," << w_chunk[wid] << ","
-                << tone_list[wid] << "," << p_list[wid] << std::endl;
-        }
+//        for (std::size_t wid = 0; wid != wlist.size(); ++wid){
+//            std::cout << wlist[wid] << "\t" << w_tag[wid] << "," << w_chunk[wid] << ","
+//                << tone_list[wid] << "," << p_list[wid] << std::endl;
+//        }
         std::cout << std::endl;
     }
 }

@@ -6,3 +6,5 @@ test/
 *.swp
 src/vncommon_py/vncommon.py
 *.so
+.idea
+cmake-build-debug
